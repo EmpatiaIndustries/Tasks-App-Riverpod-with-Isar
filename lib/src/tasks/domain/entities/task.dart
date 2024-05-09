@@ -6,14 +6,15 @@ part 'task.g.dart';
 class Task {
   Id id = Isar.autoIncrement;
   String? userID;
-  String? token;
+  String? content;
+  String? title;
 
   Task({
-    this.id = 1,
     this.userID,
-    this.token,
+    this.content,
+    this.title,
   });
 
   @override
-  String toString() => 'Task(isarID: $id, userID: $userID, token: $token)';
+  String toString() => 'Task(isarID: $id, userID: $userID, content: $content)';
 }

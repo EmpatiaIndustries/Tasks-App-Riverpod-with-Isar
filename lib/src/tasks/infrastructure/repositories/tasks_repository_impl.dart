@@ -1,15 +1,14 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tasks_app/src/tasks/domain/domain.dart';
 import 'package:tasks_app/src/tasks/infrastructure/infrastructure.dart';
 
-class TaskRepositoryImpl extends TasksRepository {
+class TasksRepositoryImpl extends TasksRepository {
   final TasksDataSource dataSource;
 
-  TaskRepositoryImpl({TasksDataSource? dataSource})
+  TasksRepositoryImpl({TasksDataSource? dataSource})
       : dataSource = dataSource ?? TasksDataSourceImpl();
 
   @override
-  Future<List<Task>?> getTasks(NotifierProviderRef ref) {
-    return dataSource.fetchAllTasks(ref);
+  Future<List<Task>> getTasks() {
+    return dataSource.fetchAllTasks();
   }
 }
