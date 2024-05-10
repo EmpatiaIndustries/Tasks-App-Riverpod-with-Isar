@@ -2,6 +2,7 @@ export 'package:tasks_app/src/tasks/presentation/screens/tasks_screen.dart';
 export 'package:tasks_app/src/tasks/presentation/screens/project_screen.dart';
 export 'package:tasks_app/src/tasks/presentation/screens/splash_screen.dart';
 export 'package:tasks_app/src/tasks/presentation/screens/helper_screen.dart';
+export 'package:tasks_app/src/tasks/presentation/screens/edit_project_screen.dart';
 export 'package:tasks_app/src/tasks/presentation/providers/tasks_providers.dart';
 export 'package:tasks_app/src/tasks/presentation/providers/greetings_provider.dart';
 export 'package:tasks_app/src/tasks/presentation/widgets/janet_scroll_bar.dart';

@@ -33,3 +33,13 @@ class SplashRoute extends GoRouteData {
     return const SplashScreen();
   }
 }
+
+@TypedGoRoute<EditProjectRoute>(path: '/edit')
+class EditProjectRoute extends GoRouteData {
+  const EditProjectRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EditProjectScreen();
+  }
+}

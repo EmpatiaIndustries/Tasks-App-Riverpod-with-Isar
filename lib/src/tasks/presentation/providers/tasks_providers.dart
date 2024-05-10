@@ -27,3 +27,11 @@ Future<List<Task>> getTasks(GetTasksRef ref) {
   final tasksRepository = ref.watch(taskRepositoryProvider);
   return tasksRepository.getTasks();
 }
+
+// @Riverpod(keepAlive: true)
+// class AddTask extends _$AddTask {
+//   Future<void> createTask(AddTasksRef ref) {
+//     final tasksRepository = ref.watch(taskRepositoryProvider);
+//     return tasksRepository.createTask();
+//   }
+// }

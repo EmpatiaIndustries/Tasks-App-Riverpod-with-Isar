@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
       $homeRoute,
       $helperRoute,
       $splashRoute,
+      $editProjectRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -66,6 +67,29 @@ extension $SplashRouteExtension on SplashRoute {
 
   String get location => GoRouteData.$location(
         '/splash',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $editProjectRoute => GoRouteData.$route(
+      path: '/edit',
+      factory: $EditProjectRouteExtension._fromState,
+    );
+
+extension $EditProjectRouteExtension on EditProjectRoute {
+  static EditProjectRoute _fromState(GoRouterState state) =>
+      const EditProjectRoute();
+
+  String get location => GoRouteData.$location(
+        '/edit',
       );
 
   void go(BuildContext context) => context.go(location);

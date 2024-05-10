@@ -11,4 +11,8 @@ class TasksRepositoryImpl extends TasksRepository {
   Future<List<Task>> getTasks() {
     return dataSource.fetchAllTasks();
   }
+
+  Future<void> createTask(Task task) {
+    return dataSource.createTask(task);
+  }
 }
