@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TasksHeader extends StatelessWidget {
-  const TasksHeader({
-    super.key,
-  });
+  const TasksHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class TasksHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'lel',
+                    'Tareas de hoy',
                     style: TextStyle(fontSize: deviceWidth * 0.05),
                   ),
                 ],

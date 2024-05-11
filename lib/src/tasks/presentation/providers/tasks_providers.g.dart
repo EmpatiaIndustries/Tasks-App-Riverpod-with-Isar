@@ -21,7 +21,7 @@ final taskRepositoryProvider = Provider<TasksRepositoryImpl>.internal(
 );
 
 typedef TaskRepositoryRef = ProviderRef<TasksRepositoryImpl>;
-String _$getTasksHash() => r'0ef377156825826dbcec294c4cfca4dbe4921f5e';
+String _$getTasksHash() => r'dd60b1323eb604b973902894dd4e3abe15c42dce';
 
 /// See also [getTasks].
 @ProviderFor(getTasks)
@@ -35,7 +35,170 @@ final getTasksProvider = FutureProvider<List<Task>>.internal(
 );
 
 typedef GetTasksRef = FutureProviderRef<List<Task>>;
-String _$selectedTaskHash() => r'40f0107bf64e21838b3e2b01fa0cf027b0430bca';
+String _$addTaskHash() => r'ee0243e3bca169f4d298917e3b5f39b5a6605cb9';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [addTask].
+@ProviderFor(addTask)
+const addTaskProvider = AddTaskFamily();
+
+/// See also [addTask].
+class AddTaskFamily extends Family<AsyncValue<void>> {
+  /// See also [addTask].
+  const AddTaskFamily();
+
+  /// See also [addTask].
+  AddTaskProvider call(
+    Task task,
+  ) {
+    return AddTaskProvider(
+      task,
+    );
+  }
+
+  @override
+  AddTaskProvider getProviderOverride(
+    covariant AddTaskProvider provider,
+  ) {
+    return call(
+      provider.task,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'addTaskProvider';
+}
+
+/// See also [addTask].
+class AddTaskProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [addTask].
+  AddTaskProvider(
+    Task task,
+  ) : this._internal(
+          (ref) => addTask(
+            ref as AddTaskRef,
+            task,
+          ),
+          from: addTaskProvider,
+          name: r'addTaskProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$addTaskHash,
+          dependencies: AddTaskFamily._dependencies,
+          allTransitiveDependencies: AddTaskFamily._allTransitiveDependencies,
+          task: task,
+        );
+
+  AddTaskProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.task,
+  }) : super.internal();
+
+  final Task task;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(AddTaskRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: AddTaskProvider._internal(
+        (ref) => create(ref as AddTaskRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        task: task,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _AddTaskProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is AddTaskProvider && other.task == task;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, task.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin AddTaskRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `task` of this provider.
+  Task get task;
+}
+
+class _AddTaskProviderElement extends AutoDisposeFutureProviderElement<void>
+    with AddTaskRef {
+  _AddTaskProviderElement(super.provider);
+
+  @override
+  Task get task => (origin as AddTaskProvider).task;
+}
+
+String _$tasksHash() => r'd343b23ef243dc760fd362f063dfa70a6dc16c3e';
+
+/// See also [Tasks].
+@ProviderFor(Tasks)
+final tasksProvider =
+    AutoDisposeAsyncNotifierProvider<Tasks, List<Task>>.internal(
+  Tasks.new,
+  name: r'tasksProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$tasksHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Tasks = AutoDisposeAsyncNotifier<List<Task>>;
+String _$selectedTaskHash() => r'8bd0039a5f4c2788eadec4295032c2771d9ac893';
 
 /// See also [SelectedTask].
 @ProviderFor(SelectedTask)
