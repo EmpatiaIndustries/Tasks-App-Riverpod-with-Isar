@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tasks_app/config/config.dart';
 import 'package:tasks_app/src/tasks/domain/domain.dart';
 import 'package:tasks_app/src/tasks/presentation/presentation.dart';
@@ -64,10 +65,13 @@ class TasksList extends ConsumerWidget {
           return ListTile(
             title: Text(task.title ?? ''),
             subtitle: Text(task.content ?? ''),
-            trailing: Checkbox(
-              value: true,
-              onChanged: (value) {
-                // context.read(tasksProvider.notifier).toggleTask(task);
+            trailing: IconButton(
+              icon: const Icon(Icons.arrow_forward_sharp),
+              onPressed: () {
+                ref
+                    .read(selectedTaskProvider.notifier)
+                    .updateSelectedTask(task);
+                context.go('/edit');
               },
             ),
           );

@@ -14,6 +14,13 @@ class Tasks extends _$Tasks {
     tasksRepository.createTask(task);
     ref.invalidateSelf();
   }
+
+  void deleteTask() {
+    final selectedTask = ref.watch(selectedTaskProvider);
+    final tasksRepository = ref.watch(taskRepositoryProvider);
+    tasksRepository.deleteTask(selectedTask.id);
+    ref.invalidateSelf();
+  }
 }
 
 @Riverpod(keepAlive: true)
@@ -43,10 +50,8 @@ Future<void> addTask(AddTaskRef ref, Task task) {
   return repository.createTask(task);
 }
 
-// @Riverpod(keepAlive: true)
-// class AddTask extends _$AddTask {
-//   Future<void> createTask(AddTasksRef ref) {
-//     final tasksRepository = ref.watch(taskRepositoryProvider);
-//     return tasksRepository.createTask();
-//   }
-// }
+@riverpod
+Future<void> deleteTask(DeleteTaskRef ref, int taskId) {
+  final TasksRepository repository = ref.watch(taskRepositoryProvider);
+  return repository.deleteTask(taskId);
+}

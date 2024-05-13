@@ -183,7 +183,135 @@ class _AddTaskProviderElement extends AutoDisposeFutureProviderElement<void>
   Task get task => (origin as AddTaskProvider).task;
 }
 
-String _$tasksHash() => r'd343b23ef243dc760fd362f063dfa70a6dc16c3e';
+String _$deleteTaskHash() => r'6517a71fa4cf5b4f4e332f1d3f178ac43c4e8458';
+
+/// See also [deleteTask].
+@ProviderFor(deleteTask)
+const deleteTaskProvider = DeleteTaskFamily();
+
+/// See also [deleteTask].
+class DeleteTaskFamily extends Family<AsyncValue<void>> {
+  /// See also [deleteTask].
+  const DeleteTaskFamily();
+
+  /// See also [deleteTask].
+  DeleteTaskProvider call(
+    int taskId,
+  ) {
+    return DeleteTaskProvider(
+      taskId,
+    );
+  }
+
+  @override
+  DeleteTaskProvider getProviderOverride(
+    covariant DeleteTaskProvider provider,
+  ) {
+    return call(
+      provider.taskId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'deleteTaskProvider';
+}
+
+/// See also [deleteTask].
+class DeleteTaskProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [deleteTask].
+  DeleteTaskProvider(
+    int taskId,
+  ) : this._internal(
+          (ref) => deleteTask(
+            ref as DeleteTaskRef,
+            taskId,
+          ),
+          from: deleteTaskProvider,
+          name: r'deleteTaskProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$deleteTaskHash,
+          dependencies: DeleteTaskFamily._dependencies,
+          allTransitiveDependencies:
+              DeleteTaskFamily._allTransitiveDependencies,
+          taskId: taskId,
+        );
+
+  DeleteTaskProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.taskId,
+  }) : super.internal();
+
+  final int taskId;
+
+  @override
+  Override overrideWith(
+    FutureOr<void> Function(DeleteTaskRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: DeleteTaskProvider._internal(
+        (ref) => create(ref as DeleteTaskRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        taskId: taskId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _DeleteTaskProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is DeleteTaskProvider && other.taskId == taskId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, taskId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin DeleteTaskRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `taskId` of this provider.
+  int get taskId;
+}
+
+class _DeleteTaskProviderElement extends AutoDisposeFutureProviderElement<void>
+    with DeleteTaskRef {
+  _DeleteTaskProviderElement(super.provider);
+
+  @override
+  int get taskId => (origin as DeleteTaskProvider).taskId;
+}
+
+String _$tasksHash() => r'428b77d3726ef082697e4e043f9e707e6f8eff8b';
 
 /// See also [Tasks].
 @ProviderFor(Tasks)
