@@ -63,17 +63,13 @@ class TasksList extends ConsumerWidget {
         itemBuilder: (context, index) {
           final Task task = tasks[index];
           return ListTile(
+            onTap: () {
+              ref.read(selectedTaskProvider.notifier).updateSelectedTask(task);
+              context.go('/edit');
+            },
             title: Text(task.title ?? ''),
             subtitle: Text(task.content ?? ''),
-            trailing: IconButton(
-              icon: const Icon(Icons.arrow_forward_sharp),
-              onPressed: () {
-                ref
-                    .read(selectedTaskProvider.notifier)
-                    .updateSelectedTask(task);
-                context.go('/edit');
-              },
-            ),
+            trailing: const Icon(Icons.arrow_forward_sharp),
           );
         },
       ),

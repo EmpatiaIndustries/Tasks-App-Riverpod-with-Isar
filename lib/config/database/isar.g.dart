@@ -6,11 +6,11 @@ part of 'isar.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isarHash() => r'79980bdd104395e5803cf209f3e3edac750a6890';
+String _$isarHash() => r'49ec1c695e51acbefaf9d0a68037485bb7eca30d';
 
 /// See also [isar].
 @ProviderFor(isar)
-final isarProvider = FutureProvider<Isar?>.internal(
+final isarProvider = FutureProvider<Isar>.internal(
   isar,
   name: r'isarProvider',
   debugGetCreateSourceHash:
@@ -19,6 +19,6 @@ final isarProvider = FutureProvider<Isar?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef IsarRef = FutureProviderRef<Isar?>;
+typedef IsarRef = FutureProviderRef<Isar>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

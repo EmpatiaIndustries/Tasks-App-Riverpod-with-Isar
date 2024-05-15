@@ -6,11 +6,11 @@ part of 'tasks_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskRepositoryHash() => r'80a9d42a94b14f463ff9559d043322f5e59e243e';
+String _$taskRepositoryHash() => r'87e6699300019ce9eddc7f4eae5cd8aba11a1f64';
 
 /// See also [taskRepository].
 @ProviderFor(taskRepository)
-final taskRepositoryProvider = Provider<TasksRepositoryImpl>.internal(
+final taskRepositoryProvider = FutureProvider<TasksRepositoryImpl>.internal(
   taskRepository,
   name: r'taskRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,12 +20,12 @@ final taskRepositoryProvider = Provider<TasksRepositoryImpl>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef TaskRepositoryRef = ProviderRef<TasksRepositoryImpl>;
-String _$getTasksHash() => r'dd60b1323eb604b973902894dd4e3abe15c42dce';
+typedef TaskRepositoryRef = FutureProviderRef<TasksRepositoryImpl>;
+String _$getTasksHash() => r'bc34da604ad933e741cf99dc91bfa67d6a56f1e7';
 
 /// See also [getTasks].
 @ProviderFor(getTasks)
-final getTasksProvider = FutureProvider<List<Task>>.internal(
+final getTasksProvider = AutoDisposeFutureProvider<List<Task>>.internal(
   getTasks,
   name: r'getTasksProvider',
   debugGetCreateSourceHash:
@@ -34,8 +34,8 @@ final getTasksProvider = FutureProvider<List<Task>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef GetTasksRef = FutureProviderRef<List<Task>>;
-String _$addTaskHash() => r'ee0243e3bca169f4d298917e3b5f39b5a6605cb9';
+typedef GetTasksRef = AutoDisposeFutureProviderRef<List<Task>>;
+String _$addTaskHash() => r'3217451e710415eb653e4cfc1ad049d48d330ef7';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -183,7 +183,7 @@ class _AddTaskProviderElement extends AutoDisposeFutureProviderElement<void>
   Task get task => (origin as AddTaskProvider).task;
 }
 
-String _$deleteTaskHash() => r'6517a71fa4cf5b4f4e332f1d3f178ac43c4e8458';
+String _$deleteTaskHash() => r'8f6f49bab3b44ca00688fe68d6e15316bf520c38';
 
 /// See also [deleteTask].
 @ProviderFor(deleteTask)
@@ -311,12 +311,11 @@ class _DeleteTaskProviderElement extends AutoDisposeFutureProviderElement<void>
   int get taskId => (origin as DeleteTaskProvider).taskId;
 }
 
-String _$tasksHash() => r'428b77d3726ef082697e4e043f9e707e6f8eff8b';
+String _$tasksHash() => r'3009da18bbd6e8988b90ac4f6fa5b91200133f05';
 
 /// See also [Tasks].
 @ProviderFor(Tasks)
-final tasksProvider =
-    AutoDisposeAsyncNotifierProvider<Tasks, List<Task>>.internal(
+final tasksProvider = AsyncNotifierProvider<Tasks, List<Task>>.internal(
   Tasks.new,
   name: r'tasksProvider',
   debugGetCreateSourceHash:
@@ -325,7 +324,7 @@ final tasksProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Tasks = AutoDisposeAsyncNotifier<List<Task>>;
+typedef _$Tasks = AsyncNotifier<List<Task>>;
 String _$selectedTaskHash() => r'8bd0039a5f4c2788eadec4295032c2771d9ac893';
 
 /// See also [SelectedTask].

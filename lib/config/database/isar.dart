@@ -6,11 +6,10 @@ import 'package:tasks_app/src/tasks/domain/domain.dart';
 part 'isar.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<Isar?> isar(IsarRef ref) async {
+Future<Isar> isar(IsarRef ref) async {
   final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.open(
+  return Isar.open(
     [TaskSchema],
     directory: dir.path,
   );
-  return isar;
 }

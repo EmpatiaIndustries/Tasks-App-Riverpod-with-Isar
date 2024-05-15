@@ -93,10 +93,10 @@ Task _taskDeserialize(
 ) {
   final object = Task(
     content: reader.readStringOrNull(offsets[0]),
+    id: id,
     title: reader.readStringOrNull(offsets[1]),
     userID: reader.readStringOrNull(offsets[2]),
   );
-  object.id = id;
   return object;
 }
 

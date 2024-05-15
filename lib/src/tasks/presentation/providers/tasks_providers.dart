@@ -1,24 +1,25 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:tasks_app/config/config.dart';
 import 'package:tasks_app/src/tasks/domain/domain.dart';
 import 'package:tasks_app/src/tasks/infrastructure/infrastructure.dart';
 
 part 'tasks_providers.g.dart';
 
-@Riverpod(keepAlive: false)
+@Riverpod(keepAlive: true)
 class Tasks extends _$Tasks {
   @override
-  Future<List<Task>> build() => ref.watch(getTasksProvider.future);
+  Future<List<Task>> build() => ref.read(getTasksProvider.future);
 
-  void createTask(Task task) {
-    final tasksRepository = ref.watch(taskRepositoryProvider);
-    tasksRepository.createTask(task);
+  void createTask(Task task) async {
+    final tasksRepository = await ref.watch(taskRepositoryProvider.future);
+    await tasksRepository.createTask(task);
     ref.invalidateSelf();
   }
 
-  void deleteTask() {
+  void deleteTask() async {
     final selectedTask = ref.watch(selectedTaskProvider);
-    final tasksRepository = ref.watch(taskRepositoryProvider);
-    tasksRepository.deleteTask(selectedTask.id);
+    final tasksRepository = await ref.watch(taskRepositoryProvider.future);
+    await tasksRepository.deleteTask(selectedTask.id);
     ref.invalidateSelf();
   }
 }
@@ -34,24 +35,25 @@ class SelectedTask extends _$SelectedTask {
 }
 
 @Riverpod(keepAlive: true)
-TasksRepositoryImpl taskRepository(TaskRepositoryRef ref) {
-  return TasksRepositoryImpl(dataSource: MockTasksDatasourceImpl());
-}
-
-@Riverpod(keepAlive: true)
-Future<List<Task>> getTasks(GetTasksRef ref) async {
-  final TasksRepository repository = ref.watch(taskRepositoryProvider);
-  return await repository.getTasks();
+Future<TasksRepositoryImpl> taskRepository(TaskRepositoryRef ref) async {
+  final isar = await ref.watch(isarProvider.future);
+  return TasksRepositoryImpl(dataSource: LocalTasksDataSourceImpl(isar));
 }
 
 @riverpod
-Future<void> addTask(AddTaskRef ref, Task task) {
-  final TasksRepository repository = ref.watch(taskRepositoryProvider);
+Future<List<Task>> getTasks(GetTasksRef ref) async {
+  final repository = await ref.watch(taskRepositoryProvider.future);
+  return repository.getTasks();
+}
+
+@riverpod
+Future<void> addTask(AddTaskRef ref, Task task) async {
+  final repository = await ref.watch(taskRepositoryProvider.future);
   return repository.createTask(task);
 }
 
 @riverpod
-Future<void> deleteTask(DeleteTaskRef ref, int taskId) {
-  final TasksRepository repository = ref.watch(taskRepositoryProvider);
+Future<void> deleteTask(DeleteTaskRef ref, int taskId) async {
+  final repository = await ref.watch(taskRepositoryProvider.future);
   return repository.deleteTask(taskId);
 }

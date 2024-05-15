@@ -6,7 +6,7 @@ import 'package:tasks_app/src/tasks/domain/domain.dart';
 class LocalTasksDataSourceImpl extends TasksDataSource {
   final Isar isar;
 
-  LocalTasksDataSourceImpl({required this.isar});
+  LocalTasksDataSourceImpl(this.isar);
 
   @override
   Future<List<Task>> getAll() async {

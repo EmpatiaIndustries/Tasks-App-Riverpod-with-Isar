@@ -4,12 +4,13 @@ part 'task.g.dart';
 
 @collection
 class Task {
-  Id id = Isar.autoIncrement;
+  Id id;
   String? userID;
   String? content;
   String? title;
 
   Task({
+    this.id = Isar.autoIncrement,
     this.userID,
     this.content,
     this.title,
