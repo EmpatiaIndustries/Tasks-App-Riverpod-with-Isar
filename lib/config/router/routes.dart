@@ -24,22 +24,22 @@ class HelperRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SplashRoute>(path: '/splash')
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SplashScreen();
-  }
-}
-
-@TypedGoRoute<EditProjectRoute>(path: '/edit')
+@TypedGoRoute<EditProjectRoute>(path: '/create')
 class EditProjectRoute extends GoRouteData {
   const EditProjectRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const EditProjectScreen();
+    return const CreateTaskScreen();
+  }
+}
+
+@TypedGoRoute<EditTaskRoute>(path: '/edit')
+class EditTaskRoute extends GoRouteData {
+  const EditTaskRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EditTaskScreen();
   }
 }

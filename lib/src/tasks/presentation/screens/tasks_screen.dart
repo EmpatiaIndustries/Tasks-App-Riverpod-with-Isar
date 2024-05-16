@@ -13,21 +13,7 @@ class TasksScreen extends ConsumerWidget {
     final taskAsyncValue = ref.watch(tasksProvider);
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          label: const Text(
-            "Agregar Tarea",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            ref
-                .read(tasksProvider.notifier)
-                .createTask(Task(title: 'Tarea', content: 'Contenido'));
-          },
-          elevation: 0,
-          backgroundColor: ref.watch(selectedColorProvider),
-          heroTag: '#fab-tasks-screen',
-          icon: const Icon(Icons.add, color: Colors.white),
-        ),
+        floatingActionButton: const AddTaskButton(),
         appBar: const CustomAppBar(),
         drawer: const CustomDrawer(),
         body: Padding(
@@ -38,8 +24,8 @@ class TasksScreen extends ConsumerWidget {
               const SizedBox(height: 25),
               taskAsyncValue.when(
                 data: (tasks) => TasksList(tasks: tasks),
-                error: (_, __) => const Center(child: Text('Error')),
-                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, __) => ErrorPage(message: err),
+                loading: () => const LoadingPage(),
               ),
               const SizedBox(height: 100),
             ],
@@ -64,8 +50,8 @@ class TasksList extends ConsumerWidget {
           final Task task = tasks[index];
           return ListTile(
             onTap: () {
-              ref.read(selectedTaskProvider.notifier).updateSelectedTask(task);
-              context.go('/edit');
+              ref.read(selectedTaskProvider.notifier).selectTask(task);
+              context.push('/edit');
             },
             title: Text(task.title ?? ''),
             subtitle: Text(task.content ?? ''),
@@ -73,6 +59,22 @@ class TasksList extends ConsumerWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class AddTaskButton extends ConsumerWidget {
+  const AddTaskButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FloatingActionButton.extended(
+      label: const Text("Agregar Tarea", style: TextStyle(color: Colors.white)),
+      onPressed: () => context.push('/create'),
+      elevation: 0,
+      backgroundColor: ref.watch(selectedColorProvider),
+      heroTag: '#fab-tasks-screen',
+      icon: const Icon(Icons.add, color: Colors.white),
     );
   }
 }

@@ -9,8 +9,8 @@ part of 'routes.dart';
 List<RouteBase> get $appRoutes => [
       $homeRoute,
       $helperRoute,
-      $splashRoute,
       $editProjectRoute,
+      $editTaskRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -57,16 +57,17 @@ extension $HelperRouteExtension on HelperRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $splashRoute => GoRouteData.$route(
-      path: '/splash',
-      factory: $SplashRouteExtension._fromState,
+RouteBase get $editProjectRoute => GoRouteData.$route(
+      path: '/create',
+      factory: $EditProjectRouteExtension._fromState,
     );
 
-extension $SplashRouteExtension on SplashRoute {
-  static SplashRoute _fromState(GoRouterState state) => const SplashRoute();
+extension $EditProjectRouteExtension on EditProjectRoute {
+  static EditProjectRoute _fromState(GoRouterState state) =>
+      const EditProjectRoute();
 
   String get location => GoRouteData.$location(
-        '/splash',
+        '/create',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -79,14 +80,13 @@ extension $SplashRouteExtension on SplashRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $editProjectRoute => GoRouteData.$route(
+RouteBase get $editTaskRoute => GoRouteData.$route(
       path: '/edit',
-      factory: $EditProjectRouteExtension._fromState,
+      factory: $EditTaskRouteExtension._fromState,
     );
 
-extension $EditProjectRouteExtension on EditProjectRoute {
-  static EditProjectRoute _fromState(GoRouterState state) =>
-      const EditProjectRoute();
+extension $EditTaskRouteExtension on EditTaskRoute {
+  static EditTaskRoute _fromState(GoRouterState state) => const EditTaskRoute();
 
   String get location => GoRouteData.$location(
         '/edit',

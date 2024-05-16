@@ -10,10 +10,12 @@ class Tasks extends _$Tasks {
   @override
   Future<List<Task>> build() => ref.read(getTasksProvider.future);
 
-  void createTask(Task task) async {
+  void createTask() async {
+    final selectedTask = ref.watch(selectedTaskProvider);
     final tasksRepository = await ref.watch(taskRepositoryProvider.future);
-    await tasksRepository.createTask(task);
+    await tasksRepository.createTask(selectedTask);
     ref.invalidateSelf();
+    await future;
   }
 
   void deleteTask() async {
@@ -21,17 +23,20 @@ class Tasks extends _$Tasks {
     final tasksRepository = await ref.watch(taskRepositoryProvider.future);
     await tasksRepository.deleteTask(selectedTask.id);
     ref.invalidateSelf();
+    await future;
   }
 }
 
 @Riverpod(keepAlive: true)
 class SelectedTask extends _$SelectedTask {
   @override
-  Task build() => Task();
+  Task build() => Task(userID: '64');
 
-  void updateSelectedTask(Task task) {
-    state = task;
-  }
+  bool isReadyToSave() => state.title != null && state.content != null;
+
+  void selectTask(Task task) => state = task;
+  void updateTitle(String title) => state.title = title;
+  void updateContent(String content) => state.content = content;
 }
 
 @Riverpod(keepAlive: true)
@@ -44,16 +49,4 @@ Future<TasksRepositoryImpl> taskRepository(TaskRepositoryRef ref) async {
 Future<List<Task>> getTasks(GetTasksRef ref) async {
   final repository = await ref.watch(taskRepositoryProvider.future);
   return repository.getTasks();
-}
-
-@riverpod
-Future<void> addTask(AddTaskRef ref, Task task) async {
-  final repository = await ref.watch(taskRepositoryProvider.future);
-  return repository.createTask(task);
-}
-
-@riverpod
-Future<void> deleteTask(DeleteTaskRef ref, int taskId) async {
-  final repository = await ref.watch(taskRepositoryProvider.future);
-  return repository.deleteTask(taskId);
 }

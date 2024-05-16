@@ -13,7 +13,7 @@ class SelectedColor extends _$SelectedColor {
   }
 }
 
-const scaffoldBackgroundColor = Color(0xFFF8F7F7);
+const scaffoldBackgroundColor = Color.fromARGB(255, 255, 255, 255);
 
 class AppTheme {
   final Color colorSeed;
