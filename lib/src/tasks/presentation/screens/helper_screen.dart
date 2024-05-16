@@ -17,7 +17,7 @@ class HelperScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Image.asset(
-              'assets/images/imagotipo.png',
+              'assets/imagotipo.png',
               width: deviceWidth * 0.5,
             ),
             const SizedBox(height: 20),
