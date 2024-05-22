@@ -32,6 +32,8 @@ class SelectedTask extends _$SelectedTask {
   @override
   Task build() => Task(userID: '64');
 
+  void clear() => state = Task(userID: '64');
+
   bool isReadyToSave() => state.title != null && state.content != null;
 
   void selectTask(Task task) => state = task;
@@ -45,7 +47,7 @@ Future<TasksRepositoryImpl> taskRepository(TaskRepositoryRef ref) async {
   return TasksRepositoryImpl(dataSource: LocalTasksDataSourceImpl(isar));
 }
 
-@riverpod
+@Riverpod(keepAlive: false)
 Future<List<Task>> getTasks(GetTasksRef ref) async {
   final repository = await ref.watch(taskRepositoryProvider.future);
   return repository.getTasks();

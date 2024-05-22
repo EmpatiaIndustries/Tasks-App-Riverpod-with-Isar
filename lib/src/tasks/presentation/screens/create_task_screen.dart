@@ -64,6 +64,7 @@ class NewTaskForm extends ConsumerWidget {
         FilledButton(
           onPressed: () {
             ref.read(tasksProvider.notifier).createTask();
+            ref.read(selectedTaskProvider.notifier).clear();
             context.pop();
           },
           child: const Text('Guardar'),

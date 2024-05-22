@@ -15,20 +15,20 @@ class LocalTasksDataSourceImpl extends TasksDataSource {
 
   @override
   Future<Task?> getByID(int id) async {
-    return await isar.tasks.where().idEqualTo(id).findFirst();
+    return await isar.tasks.get(id);
   }
 
   @override
   Future<void> insert(Task task) async {
     await isar.writeTxn(() async {
-      isar.tasks.put(task);
+      await isar.tasks.put(task);
     });
   }
 
   @override
   Future<void> update(Task task) async {
     await isar.writeTxn(() async {
-      isar.tasks.put(task);
+      await isar.tasks.put(task);
     });
   }
 

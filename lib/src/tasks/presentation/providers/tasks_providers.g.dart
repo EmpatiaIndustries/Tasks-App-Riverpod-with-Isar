@@ -21,7 +21,7 @@ final taskRepositoryProvider = FutureProvider<TasksRepositoryImpl>.internal(
 );
 
 typedef TaskRepositoryRef = FutureProviderRef<TasksRepositoryImpl>;
-String _$getTasksHash() => r'bc34da604ad933e741cf99dc91bfa67d6a56f1e7';
+String _$getTasksHash() => r'8e9cc2fc0d160b5a6930f493e2b6fb0310eaa531';
 
 /// See also [getTasks].
 @ProviderFor(getTasks)
@@ -49,7 +49,7 @@ final tasksProvider = AsyncNotifierProvider<Tasks, List<Task>>.internal(
 );
 
 typedef _$Tasks = AsyncNotifier<List<Task>>;
-String _$selectedTaskHash() => r'0b2b4ca067124c3cd670e1f428f61463f38a83ab';
+String _$selectedTaskHash() => r'93deff49000e149f1ad41824914189d8c5a194d7';
 
 /// See also [SelectedTask].
 @ProviderFor(SelectedTask)
